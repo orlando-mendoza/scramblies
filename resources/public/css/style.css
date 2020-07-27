@@ -23,7 +23,7 @@ body {
 }
 
 
-.value {
+span .value {
     padding-left: 15px;
     text-align: left;
     font-size: 30px;
@@ -54,9 +54,10 @@ body {
      font-weight: bold;
 }
 
-
-
-
+  .result span{
+    font-size: 30px;
+    font-weight: bold;
+}
 
   input {
     margin: 5px auto 0;

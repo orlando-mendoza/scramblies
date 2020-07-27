@@ -1,7 +1,7 @@
 (ns scramblies.client
-    (:require [reagent.core :as reagent :refer [atom]]
-              [reagent.dom :as rd]
-              [ajax.core :refer [GET]]))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [reagent.dom :as rd]
+            [ajax.core :refer [GET]]))
 
 (enable-console-print!)
 
@@ -11,7 +11,7 @@
                           :word ""
                           :button "Try it!"
                           :data-received? false
-                          :result {:label "Result"
+                          :result {:label "Result: "
                                    :value nil}}))
 
 (defn error-handler [{:keys [status status-text]}]
@@ -37,8 +37,8 @@
 (defn result [rslt]
   (println (str "rslt: " rslt))
   [:div {:class "result"}
-   [:h3 (:label rslt)]
-   [:div {:class "value"}
+   [:span (:label rslt)]
+   [:span {:class "value"}
     (str (:value rslt))]])
 
 (defn title []
@@ -51,7 +51,7 @@
 (defn letters []
   [:div
    [:input {:type "text"
-            :placeholder "Letters"
+            :placeholder "Enter letters"
             :value (:letters @app-state)
             :on-change #(swap! app-state assoc :letters (-> % .-target .-value))}]
    [:h2 "Enter letters"]])
@@ -59,14 +59,14 @@
 (defn word []
   [:div
    [:input {:type "text"
-            :placeholder "Word"
+            :placeholder "Enter a word"
             :value (:word @app-state)
             :on-change #(swap! app-state assoc :word (-> % .-target .-value))}]
    [:h2 "Enter a word"]])
 
 (defn button []
   [:button {:class "btn"
-           :on-click get-result!} "Try it!"])
+            :on-click get-result!} "Try it!"])
 
 (defn app []
   [:div {:class "app"}
