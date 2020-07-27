@@ -25,7 +25,7 @@
               [{:id "dev"
                 :source-paths ["src/cljs"]
                 :figwheel {:on-jsload "scramblies.client/on-js-reload"
-                           :open-urls ["http://localhost:3449/index.html"]}
+                           :open-urls ["http://localhost:3450/index.html"]}
 
 
                 :compiler {:main scramblies.client
@@ -44,7 +44,7 @@
                            :optimizations :advanced
                            :pretty-print false}}]}
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
-             ;; :server-port 3449 ;; default
+             :server-port 3450 ;; default
              ;; :server-ip "127.0.0.1"
 
              :css-dirs ["resources/public/css"] ;; watch and update CSS

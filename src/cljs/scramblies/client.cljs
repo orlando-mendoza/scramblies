@@ -6,8 +6,10 @@
 (enable-console-print!)
 
 (defonce app-state (atom {:title "Scramblies"
+                          :description "Enter a string of lower case letters to see if they can be rearranged to match your word"
                           :letters ""
                           :word ""
+                          :button "Try it!"
                           :data-received? false
                           :result {:label "Result"
                                    :value nil}}))
@@ -35,37 +37,53 @@
 (defn result [rslt]
   (println (str "rslt: " rslt))
   [:div {:class "result"}
-   [:h2 (:label rslt)]
+   [:h3 (:label rslt)]
    [:div {:class "value"}
     (str (:value rslt))]])
-
 
 (defn title []
   [:h1 (:title @app-state)])
 
+(defn description []
+  [:p
+   [:span (:description @app-state)]])
+
 (defn letters []
-  [:div {:class-name "letters"}
-   [:h3 "Enter letters"]
+  [:div
    [:input {:type "text"
             :placeholder "Letters"
             :value (:letters @app-state)
-            :on-change #(swap! app-state assoc :letters (-> % .-target .-value))}]])
+            :on-change #(swap! app-state assoc :letters (-> % .-target .-value))}]
+   [:h2 "Enter letters"]])
 
 (defn word []
-  [:div {:class-name "word"}
-   [:h3 "Enter a word"]
+  [:div
    [:input {:type "text"
             :placeholder "Word"
             :value (:word @app-state)
             :on-change #(swap! app-state assoc :word (-> % .-target .-value))}]
-   [:button {:on-click get-result!} "Try!"]])
+   [:h2 "Enter a word"]])
+
+(defn button []
+  [:button {:class "btn"
+           :on-click get-result!} "Try it!"])
 
 (defn app []
   [:div {:class "app"}
-   [title]
-   [letters]
-   [word]
-   [result (:result @app-state)]])
+   [:div {:class "container"}
+    [title]
+    [description]
+    [:div {:class "inputs"}
+     [:div {:class "inside-inputs"}
+      [letters]]
+     [:div {:class "inside-inputs"}
+      [word]]]
+    [:p]
+    [:div {:class "btn-area"}
+     [:p
+      [button]]]
+    [:div {:class "value"}
+     [result (:result @app-state)]]]])
 
 (rd/render [app]
            (. js/document (getElementById "app")))
