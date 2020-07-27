@@ -8,8 +8,8 @@
     (every? (fn [[k v]] (<= v (get letters k 0))) word)))
 
 (defn handle-scramble [req]
-  (let [s1 (str (get-in req [:params :s1]))
-        s2 (str (get-in req [:params :s2]))
+  (let [s1 (str (get-in req [:query-params "s1"]))
+        s2 (str (get-in req [:query-params "s2"]))
         _ (println "s1: " s1)
         _ (println "s2: " s2)
         result (scramble? s1 s2)]
@@ -18,4 +18,5 @@
      :body (json/write-str {:result result})}))
 
 (comment
-  (scramble? "ls cifa ;ks jkqa" "casa"))
+  (scramble? "ls cifa ;ks jkqa" "casa" )
+          )

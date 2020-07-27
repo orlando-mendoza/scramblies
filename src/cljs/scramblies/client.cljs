@@ -12,17 +12,33 @@
                           :result {:label "Result"
                                    :value nil}}))
 
+(defn error-handler [{:keys [status status-text]}]
+  (.log js/console (str "something bad happened: " status " " status-text  :failure)))
+
 (defn handle-response [resp]
-  (let [result (get :result resp)]
+  (let [_ (println resp)
+        res (:result resp)]
     (swap! app-state
-           update-in [:result :value] (constantly result))))
+           update-in [:result :value] (constantly res))
+    (println "app-state: " app-state)))
 
 (defn get-result! []
   (let [s1 (:letters @app-state)
         s2 (:word @app-state)]
-    (GET "/api" {:params {"s1" s1
-                          "s2" s2}
-                 :handler handle-response})))
+    (GET "/api" {:params {:s1 s1
+                          :s2 s2}
+                 :handler handle-response
+                 :error-handler error-handler
+                 :response-format :json
+                 :keywords? true})))
+
+(defn result [rslt]
+  (println (str "rslt: " rslt))
+  [:div {:class "result"}
+   [:h2 (:label rslt)]
+   [:div {:class "value"}
+    (str (:value rslt))]])
+
 
 (defn title []
   [:h1 (:title @app-state)])
@@ -48,8 +64,8 @@
   [:div {:class "app"}
    [title]
    [letters]
-   [word]])
+   [word]
+   [result (:result @app-state)]])
 
 (rd/render [app]
            (. js/document (getElementById "app")))
-
