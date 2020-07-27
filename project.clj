@@ -6,13 +6,14 @@
 
   :min-lein-version "2.9.1"
 
-  :dependencies [[org.clojure/clojure "1.10.0"]
+  :dependencies [[cljs-ajax "0.8.0"]
+                 [compojure "1.6.1"]
+                 [org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.773"]
                  [org.clojure/core.async  "0.4.500"]
                  [reagent "0.10.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
-                 [cljs-ajax "0.8.0"]
                  [ring "1.8.1"]
-                 [compojure "1.6.1"]]
+                 [ring/ring-mock "0.4.0"]]
 
 
   :plugins [[lein-figwheel "0.5.20"]
@@ -44,7 +45,7 @@
                            :optimizations :advanced
                            :pretty-print false}}]}
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
-             ;:server-port 3450 ;; default
+                                        ;:server-port 3450 ;; default
              ;; :server-ip "127.0.0.1"
 
              :css-dirs ["resources/public/css"] ;; watch and update CSS
