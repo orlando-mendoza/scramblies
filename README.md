@@ -1,10 +1,14 @@
 # scramblies
 
-FIXME: Write a one-line description of your library/project.
+FullStack Clojure + ClojureScript example.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+ Implements an API that accepts two strings and applies `scramble?` function. This function returns `true` if a portion of str1 characters can be rearranged to match str2, otherwise returns false.
+
+ Scramble? function only accepts lower case letters [a-z]. No punctuation or digits.
+
+ UI was created using Clojurescript + Reagent and Ajax.
 
 ## Setup
 
@@ -30,11 +34,13 @@ To create a production build run:
 
     lein do clean, cljsbuild once min
 
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL. 
+    lein run 8000
+
+And open your browser in [localhost:8000](http://localhost:8000/). You will not
+get live reloading, nor a REPL.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2020
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.

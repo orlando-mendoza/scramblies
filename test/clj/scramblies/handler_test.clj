@@ -28,13 +28,11 @@
     (is (= true (scramble? "hirljkgac", "rick")))
     (is (= false (scramble? "inmutability", "immutability")))
     (is (= true (scramble? "fsjlafsdiadp", "lisp")))
+    (is (= false (scramble? "fsjlafCsdiadp", "lisp")))
     (is (= true (scramble? "repl", "repl")))))
 
 (deftest c-test1
   (testing "handle-scramble"
-    (let [_ (println (app (-> (mock/request :get "/api")
-                                          (mock/query-string {:s1 "fahdfkhalskjblj"
-                                                              :s2 "pink"}))))])
     (is (= (app (-> (mock/request :get "/api")
                                 (mock/query-string {:s1 "fdjpvopawknalsikj"
                                                     :s2 "pink"})))
